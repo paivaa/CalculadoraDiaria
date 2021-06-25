@@ -1,0 +1,595 @@
+﻿<!DOCTYPE html>
+<html>
+
+<!--
+***********************************************************
+
+versão: 0.0.10
+Última alteração : 22/06/2021
+Realizado por: Augusto de Alencar
+release notes:
+
+***********************************************************
+-->
+
+<head>
+<title>Calculadora de diárias</title>
+<meta name="generator" content="Bluefish 2.2.6" >
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8">
+<meta http-equiv="content-style-type" content="text/css">
+<meta http-equiv="expires" content="0">
+
+<style type="text/css">
+	body {
+		font:10pt Verdana, Sans-serif;
+		/*Background-color:#EAF3FF*/;
+	}
+	table
+	{
+    border-collapse: collapse;
+	}
+	td
+	{
+    border: 1px solid grey;
+	}
+</style>
+
+<script type="text/javascript">
+	//***** Valores Nacionais********
+
+	GA1= 211.01;   // DIÁRIA PARA SECRETÁRIO NO GRUPO A
+	GA2= 167.05;    //DIÁRIA PARA DEMAIS DO GRUPO A
+	GB1= 276.07;   // DIÁRIA PARA SECRETÁRIO DO GRUPO B
+	GB2= 237.38;   // DIÁRIA PARA OS DEMAIS DO GRUPO B
+	GC1= 474.77;   // DIÁRIA PARA SECRETÁRIO DO GRUPO C
+	GC2= 422.02;   // DIÁRIA PARA OS DEMAIS DO GRUPO C
+	CB = 422.02;	// DIÁRIA DE EVENTUAIS COLABORADORES valor para fora do estado.
+
+	//**** Valores internacionais**********
+	GA1i= 330; 	// Secretário de Estado ou Equivalentes
+	GA2i= 300; 	// Cargos de Direção e Assessoramento Superior a nível DAS-6, DAS-5, DAS-4 e DAS-3 e Equivalentes nas Autarquias e Fundações
+	GA3i= 233; 	// Cargos de Direção, Assessoramento Superiores, a nível DAS-2 e DAS-1, Técnicos de Nível Superior, Funções Gratificadas e Demais Cargos, Empregos e Funções Equivalentes nas Autarquias e Fundações
+	GB1i= 400; 	// Secretário de Estado ou Equivalentes
+	GB2i= 360.36; // Cargos de Direção e Assessoramento Superior a nível DAS-6, DAS-5, DAS-4 e DAS-3 e Equivalentes nas Autarquias e Fundações
+	GB3i= 279;	// Cargos de Direção, Assessoramento Superiores, a nível DAS-2 e DAS-1, Técnicos de Nível Superior, Funções Gratificadas e Demais Cargos, Empregos e Funções Equivalentes nas Autarquias e Fundações
+
+//*****VARIÁVEL PARA MANIPULAÇÃO DE RESULTADO***
+
+	RESULTADO= 0;
+
+//********CÁLCULO DE DIÁRIAS NACIONAIS*****************
+
+	function calcDiariaNac()
+	{
+
+	 	if (formnac.cargo.value==1)// Se é secretário
+	 	{
+	 		if (formnac.destino.value=="A") // se pertence ao grupo A
+	 		{
+	 			if (formnac.meia.checked==true) //Se a meia diária estiver marcada, é acrescido este valor.
+	 			{
+	 				QTD= parseInt(formnac.diarias.value);
+	 				RESULTADO=parseFloat(GA1*QTD+(GA1/2));
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}
+				else //CALCULA SEM MEIA
+				{
+					QTD= parseInt(formnac.diarias.value);
+	 				RESULTADO=parseFloat(GA1*QTD);
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}
+	 		}
+
+	 		if (formnac.destino.value=="B")
+	 		{
+	 			if (formnac.meia.checked==true) //Se a meia diária estiver marcada, é acrescido este valor.
+	 			{
+	 				QTD= parseInt(formnac.diarias.value);
+	 				RESULTADO=GB1*QTD+(GB1/2);
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}
+				else //CALCULA SEM MEIA
+				{
+					QTD= parseInt(formnac.diarias.value);
+	 				RESULTADO=GB1*QTD;
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}
+	 		}
+
+	 		if (formnac.destino.value=="C")
+	 		{
+				if (formnac.meia.checked==true) //Se a meia diária estiver marcada, é acrescido este valor.
+	 			{
+	 				QTD= parseInt(formnac.diarias.value);
+					RESULTADODIARIA=parseFloat(GC1*QTD);
+					PORCENTAGEMINTEIRA=parseFloat(GC2);
+	 				RESULTADODIARIACOM20=parseFloat(RESULTADODIARIA + (PORCENTAGEMINTEIRA * 0.2));
+	 				RESULTADOMEIADIARIA=parseFloat(GC1/2);
+					RESULTADO = parseFloat(RESULTADODIARIACOM20 + RESULTADOMEIADIARIA);
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}
+				else //CALCULA SEM MEIA
+				{
+					QTD= parseInt(formnac.diarias.value);
+					RESULTADODIARIA=parseFloat(GC1*QTD);
+					PORCENTAGEMINTEIRA=parseFloat(GC2);
+	 				RESULTADO=parseFloat(RESULTADODIARIA + (PORCENTAGEMINTEIRA * 0.2));
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}	
+
+	 		}
+	 	}
+
+	 	// ***Diária de Cargos de Direção, Assessoramento, Nível Superior, Operacional e Equivalente. (Empregados idem)***
+
+	 	if (formnac.cargo.value==2)
+	 	{
+	 		if (formnac.destino.value=="A") // se pertence ao grupo A
+	 		{
+	 			if (formnac.meia.checked==true) //Se a meia diária estiver marcada, é acrescido este valor.
+	 			{
+	 				QTD= parseInt(formnac.diarias.value);
+	 				RESULTADO=parseFloat(GA2*QTD+(GA2/2));
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}
+				else //CALCULA SEM MEIA
+				{
+					QTD= parseInt(formnac.diarias.value);
+	 				RESULTADO=parseFloat(GA2*QTD);
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}
+	 		}
+
+	 		if (formnac.destino.value=="B")
+	 		{
+	 			if (formnac.meia.checked==true) //Se a meia diária estiver marcada, é acrescido este valor.
+	 			{
+	 				QTD= parseInt(formnac.diarias.value);
+	 				RESULTADO=GB2*QTD+(GB2/2);
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}
+				else //CALCULA SEM MEIA
+				{
+					QTD= parseInt(formnac.diarias.value);
+	 				RESULTADO=GB2*QTD;
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}
+	 		}
+
+	 		if (formnac.destino.value=="C")
+	 		{
+				if (formnac.meia.checked==true) //Se a meia diária estiver marcada, é acrescido este valor.
+	 			{		
+					QTD= parseInt(formnac.diarias.value);
+					RESULTADODIARIA=parseFloat(GC2*QTD);
+					PORCENTAGEMINTEIRA=parseFloat(GC2);
+	 				RESULTADODIARIACOM20=parseFloat(RESULTADODIARIA + (PORCENTAGEMINTEIRA * 0.2));
+	 				RESULTADOMEIADIARIA=parseFloat(GC2/2);
+					RESULTADO = parseFloat(RESULTADODIARIACOM20 + RESULTADOMEIADIARIA);
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}
+				else //CALCULA SEM MEIA
+				{
+					QTD= parseInt(formnac.diarias.value);
+					RESULTADODIARIA=parseFloat(GC2*QTD);
+					PORCENTAGEMINTEIRA=parseFloat(GC2);
+	 				RESULTADO=parseFloat(RESULTADODIARIA + (PORCENTAGEMINTEIRA * 0.2));
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}
+
+	 		}
+	 	}
+	 	// ***Diária de eventuais colaboradores***
+	 	if (formnac.cargo.value==3)
+	 	{
+
+	 		if (formnac.destino.value=="A") // se pertence ao grupo A
+	 		{
+	 			if (formnac.meia.checked==true) //Se a meia diária estiver marcada, é acrescido este valor.
+	 			{
+	 				QTD= parseInt(formnac.diarias.value);
+	 				RESULTADO=parseFloat(GA2*QTD+(GA2/2));
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}
+				else //CALCULA SEM MEIA
+				{
+					QTD= parseInt(formnac.diarias.value);
+	 				RESULTADO=parseFloat(GA2*QTD);
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}
+	 		}
+
+	 		if (formnac.destino.value=="B")
+	 		{
+	 			if (formnac.meia.checked==true) //Se a meia diária estiver marcada, é acrescido este valor.
+	 			{
+	 				QTD= parseInt(formnac.diarias.value);
+	 				RESULTADO=GB2*QTD+(GB2/2);
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}
+				else //CALCULA SEM MEIA
+				{
+					QTD= parseInt(formnac.diarias.value);
+	 				RESULTADO=GB2*QTD;
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}
+	 		}
+
+	 		if (formnac.destino.value=="C")
+	 		{
+				if (formnac.meia.checked==true) //Se a meia diária estiver marcada, é acrescido este valor.
+	 			{
+					QTD= parseInt(formnac.diarias.value);
+					RESULTADODIARIA=parseFloat(CB*QTD);
+					PORCENTAGEMINTEIRA=parseFloat(GC2);
+	 				RESULTADODIARIACOM20=parseFloat(RESULTADODIARIA + (PORCENTAGEMINTEIRA * 0.2));
+	 				RESULTADOMEIADIARIA=parseFloat(CB/2);
+					RESULTADO = parseFloat(RESULTADODIARIACOM20 + RESULTADOMEIADIARIA);
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}
+				else //CALCULA SEM MEIA
+				{
+					QTD= parseInt(formnac.diarias.value);
+					RESULTADODIARIA=parseFloat(CB*QTD);
+					PORCENTAGEMINTEIRA=parseFloat(GC2);
+	 				RESULTADO=parseFloat(RESULTADODIARIA + (PORCENTAGEMINTEIRA * 0.2));
+	 				formnac.resultado.value=RESULTADO.toFixed(2);
+				}	
+			
+	 		}
+	 	}
+	}
+
+//********CÁCULO DE DIÁRIAS INTERNACIONAIS**************
+
+	function calcDiariaInt()
+	{
+
+		if (formint.destinoint.value=="A") // se for países da amarica do sul e central
+	 	{
+
+	 		if (formint.cargoint.value==1) //se for secretário de Estado ou Equivalentes
+	 		{
+	 			if (formint.meiaint.checked==true) //se for com meia diária
+	 			{
+	 				QTD= parseInt(formint.diariasint.value);
+	 				RESULTADO=parseFloat(GA1i*QTD+(GA1i/2));
+	 				formint.resultadoint.value=RESULTADO.toFixed(2);
+				}
+				else // sem meia diária
+				{
+					QTD= parseInt(formint.diariasint.value);
+					RESULTADO=parseFloat(GA1i*QTD);
+	 				formint.resultadoint.value=RESULTADO.toFixed(2);
+				}
+	 		}
+	 		if (formint.cargoint.value==2) // se for  Cargos de Direção e Assessoramento Superior a nível DAS-6, DAS-5, DAS-4 e DAS-3 e Equivalentes nas Autarquias e Fundações
+	 		{
+	 			if (formint.meiaint.checked==true)  //se for com meia diária
+	 			{
+	 				QTD= parseInt(formint.diariasint.value);
+	 				RESULTADO=parseFloat(GA2i*QTD+(GA2i/2));
+	 				formint.resultadoint.value=RESULTADO.toFixed(2);
+				}
+				else // sem meia diária
+				{
+					QTD= parseInt(formint.diariasint.value);
+					RESULTADO=parseFloat(GA2i*QTD);
+	 				formint.resultadoint.value=RESULTADO.toFixed(2);
+				}
+
+			}
+			if (formint.cargoint.value==3)  // se for Cargos de Direção, Assessoramento Superiores, a nível DAS-2 e DAS-1, Técnicos de Nível Superior, Funções Gratificadas e Demais Cargos, Empregos e Funções Equivalentes nas Autarquias e Fundações
+			{
+					if (formint.meiaint.checked==true) //se for com meia diária
+		 			{
+		 				QTD= parseInt(formint.diariasint.value);
+		 				RESULTADO=parseFloat(GA3i*QTD+(GA3i/2));
+		 				formint.resultadoint.value=RESULTADO.toFixed(2);
+					}
+					else // sem meia diária
+					{
+						QTD= parseInt(formint.diariasint.value);
+						RESULTADO=parseFloat(GA3i*QTD);
+		 				formint.resultadoint.value=RESULTADO.toFixed(2);
+					}
+			}
+	 	}
+	 	else
+		//if (formint.destinoint.value=="A") // se for países da amarica do sul e central
+	 	{
+
+	 		if (formint.cargoint.value==1) //se for secretário de Estado ou Equivalentes
+	 		{
+	 			if (formint.meiaint.checked==true) //se for com meia diária
+	 			{
+	 				QTD= parseInt(formint.diariasint.value);
+	 				RESULTADO=parseFloat(GB1i*QTD+(GB1i/2));
+	 				formint.resultadoint.value=RESULTADO.toFixed(2);
+				}
+				else // sem meia diária
+				{
+					QTD= parseInt(formint.diariasint.value);
+					RESULTADO=parseFloat(GB1i*QTD);
+	 				formint.resultadoint.value=RESULTADO.toFixed(2);
+				}
+	 		}
+	 		if (formint.cargoint.value==2) // se for  Cargos de Direção e Assessoramento Superior a nível DAS-6, DAS-5, DAS-4 e DAS-3 e Equivalentes nas Autarquias e Fundações
+	 		{
+	 			if (formint.meiaint.checked==true)  //se for com meia diária
+	 			{
+	 				QTD= parseInt(formint.diariasint.value);
+	 				RESULTADO=parseFloat(GB2i*QTD+(GB2i/2));
+	 				formint.resultadoint.value=RESULTADO.toFixed(2);
+				}
+				else // sem meia diária
+				{
+					QTD= parseInt(formint.diariasint.value);
+					RESULTADO=parseFloat(GB2i*QTD);
+	 				formint.resultadoint.value=RESULTADO.toFixed(2);
+				}
+
+			}
+			if (formint.cargoint.value==3)  // se for Cargos de Direção, Assessoramento Superiores, a nível DAS-2 e DAS-1, Técnicos de Nível Superior, Funções Gratificadas e Demais Cargos, Empregos e Funções Equivalentes nas Autarquias e Fundações
+			{
+					if (formint.meiaint.checked==true) //se for com meia diária
+		 			{
+		 				QTD= parseInt(formint.diariasint.value);
+		 				RESULTADO=parseFloat(GB3i*QTD+(GB3i/2));
+		 				formint.resultadoint.value=RESULTADO.toFixed(2);
+					}
+					else // sem meia diária
+					{
+						QTD= parseInt(formint.diariasint.value);
+						RESULTADO=parseFloat(GB3i*QTD);
+		 				formint.resultadoint.value=RESULTADO.toFixed(2);
+					}
+			}
+	 	}
+
+	}
+
+//********TROCAR DE FORMULÁRIO**************************
+
+	function showhide()
+   {
+   	var div1 = document.getElementById("nac");
+     	var div2 = document.getElementById("int");
+
+     	if (div1.style.display == "none")
+     	{
+     		div1.style.display = "block";
+     		div2.style.display = "none";
+     	}
+    	else
+    	{
+        	div1.style.display = "none";
+        	div2.style.display = "block";
+
+      }
+   }
+
+</script>
+</head>
+<body class="body">
+	<div id="geral" style= " margin-left:25%; margin-right: 25%;	r">
+		<p>&nbsp;</p>
+		<p><h1 align="center"> FUNTELPA </h1></p>
+		<p align="center">Versão 0.0.10</p>
+		<p><center><button id="button" onclick="showhide()">Trocar de formuário</button></center></p>
+
+
+		<div id="nac">
+			<form name="formnac">
+
+				<p><center><h2><b>Cálculo de Diárias Nacionais</b></h2></center></p>
+				<p></p>
+				<fieldset id="cargo"><legend>Cargo</legend>
+					
+					<label><p><input type="radio" name="cargo" value="1" checked="yes" > 1- Secretários e Equivalentes (Presidentes idem)</p></label>
+					<label><p><input type="radio" name="cargo" value="2" > 2- Cargos de Direção, Assessoramento, Nível Superior, Operacional e Equivalente. (Empregados idem).</p></label>
+					<label><p><input type="radio" name="cargo" value="3" > 3- Colaboradores eventuais</p></label>
+				</fieldset>
+				<fieldset id="gdestino"><legend>Destino</legend>
+					<label>Localidade :
+      				<select name="destino">
+						<option value="" selected>Selecione um destino:</option>
+						
+						<optgroup label="GRUPO A">
+							<option value="A">	Ananindeua	</option>
+							<option value="A">	Benevides	</option>
+							<option value="A">	Castanhal	</option>
+							<option value="A">	Colares	</option>
+							<option value="A">	Curuçá	</option>
+							<option value="A">	Igarapé-Açu	</option>
+							<option value="A">	Inhangapi	</option>
+							<option value="A">	Magalhães Barata	</option>
+							<option value="A">	Maracanã	</option>
+							<option value="A">	Marapanim	</option>
+					        <option value="A">	Marituba	</option>
+							<option value="A">	Marudá	</option>
+							<option value="A">	Santo Antônio do Tauá	</option>
+							<option value="A">	São Francisco do Pará	</option>
+							<option value="A">	Terra Alta	</option>
+							<option value="A">	Vigia	</option>
+						</optgroup>
+						<optgroup label="GRUPO B">
+         					<option value="B">	Abaetetuba	</option>
+				         	<option value="B">	Abel Figueiredo	</option>
+				         	<option value="B">	Acará	</option>
+				         	<option value="B">	Afuá	</option>
+				         	<option value="B">	Água Azul do Norte	</option>
+				         	<option value="B">	Alenquer	</option>
+				         	<option value="B">	Almeirim	</option>
+				         	<option value="B">	Altamira	</option>
+				         	<option value="B">	Anajás	</option>
+				         	<option value="B">	Augusto Corrêa	</option>
+				         	<option value="B">	Aurora do Pará	</option>
+							<option value="B">	Aveiro	</option>
+							<option value="B">	Bagre	</option>
+							<option value="B">	Baião	</option>
+							<option value="B">	Bannach	</option>
+							<option value="B">	Barcarena	</option>
+							<option value="B">	Belém	</option>
+							<option value="B">	Bom Jesus do Tocantins	</option>
+							<option value="B">	Bonito	</option>
+							<option value="B">	Bragança	</option>
+							<option value="B">	Brasil Novo	</option>
+							<option value="B">	Brejo Grande do Araguaia	</option>
+							<option value="B">	Breu Branco	</option>
+							<option value="B">	Breves	</option>
+							<option value="B">	Bujarú	</option>
+							<option value="B">	Cachoeira do Arari	</option>
+							<option value="B">	Cametá	</option>
+							<option value="B">	Capanema	</option>
+							<option value="B">	Capitão Poço	</option>
+							<option value="B">	Chaves	</option>
+							<option value="B">	Conceição do Araguaia	</option>
+							<option value="B">	Concórdia do Pará	</option>
+							<option value="B">	Cumarú do Norte	</option>
+							<option value="B">	Curionópolis	</option>
+							<option value="B">	Curralinho	</option>
+							<option value="B">	Dom Elizeu	</option>
+							<option value="B">	Eldorado do Carajás	</option>
+							<option value="B">	Faro	</option>
+							<option value="B">	Floresta do Araguaia	</option>
+							<option value="B">	Garrafão do Norte	</option>
+							<option value="B">	Goianésia do Pará	</option>
+							<option value="B">	Gurupá	</option>
+							<option value="B">	Igarapé-Miri	</option>
+							<option value="B">	Ipixuna do Pará	</option>
+							<option value="B">	Irituia	</option>
+							<option value="B">	Itaituba	</option>
+							<option value="B">	Itupiranga	</option>
+							<option value="B">	Jacareacanga	</option>
+							<option value="B">	Jacundá	</option>
+							<option value="B">	Juriti	</option>
+							<option value="B">	Limoeiro do Ajurú	</option>
+							<option value="B">	Mãe do Rio	</option>
+							<option value="B">	Marabá	</option>
+							<option value="B">	Medicilândia	</option>
+							<option value="B">	Melgaço	</option>
+							<option value="B">	Mocajuba	</option>
+							<option value="B">	Mojú	</option>
+							<option value="B">	Monte Alegre	</option>
+							<option value="B">	Muaná	</option>
+							<option value="B">	Nova Esperança do Piriá	</option>
+							<option value="B">	Nova Ipixuna	</option>
+							<option value="B">	Nova Timboteua	</option>
+							<option value="B">	Novo Progresso	</option>
+							<option value="B">	Novo Repartimento	</option>
+							<option value="B">	Óbidos	</option>
+							<option value="B">	Oeiras do Pará	</option>
+							<option value="B">	Oriximiná	</option>
+							<option value="B">	Ourém	</option>
+							<option value="B">	Ourilândia	</option>
+							<option value="B">	Pacajás	</option>
+							<option value="B">	Palestina do Pará	</option>
+							<option value="B">	Paragominas	</option>
+							<option value="B">	Parauapebas	</option>
+							<option value="B">	Pau D’Arco	</option>
+							<option value="B">	Peixe-Boi	</option>
+							<option value="B">	Placas	</option>
+							<option value="B">	Ponta de Pedras	</option>
+							<option value="B">	Portal	</option>
+							<option value="B">	Porto de Moz	</option>
+							<option value="B">	Prainha	</option>
+							<option value="B">	Primavera	</option>
+							<option value="B">	Redenção	</option>
+							<option value="B">	Rio Maria	</option>
+							<option value="B">	Rondon do Pará	</option>
+							<option value="B">	Rurópolis	</option>
+							<option value="B">	Salinópolis	</option>
+							<option value="B">	Salvaterra	</option>
+							<option value="B">	Santa Maria das Barreiras	</option>
+							<option value="B">	Santa Maria do Pará	</option>
+							<option value="B">	Santana do Araguaia	</option>
+							<option value="B">	Santarém </option>
+							<option value="B">	Santarém Novo	</option>
+							<option value="B">	São Caetano de Odivelas	</option>
+							<option value="B">	São domingos do Araguaia	</option>
+							<option value="B">	São Domingos do Capim	</option>
+							<option value="B">	São João de Pirabas	</option>
+							<option value="B">	São Miguel do Guamá	</option>
+							<option value="B">	São Sebastião da Boa Vista	</option>
+							<option value="B">	Senador José Porfírio	</option>
+							<option value="B">	Soure	</option>
+							<option value="B">	Tailândia	</option>
+							<option value="B">	Terra Santa	</option>
+							<option value="B">	Tomé-Açú	</option>
+							<option value="B">	Tracuateua	</option>
+							<option value="B">	Trairão	</option>
+							<option value="B">	Tucumã	</option>
+							<option value="B">	Tucuruí	</option>
+							<option value="B">	Ulianópolis	</option>
+							<option value="B">	Uruará	</option>
+							<option value="B">	Vitória do Xingú e Xinguara e demais localidades do interior	</option>
+						</optgroup>
+						<optgroup label="GRUPO C">
+							<option value="C">	Fora do Estado*****	</option>
+						</optgroup>
+				      </select>
+      			</label>
+				</fieldset>
+				<fieldset ><legend> Diárias:</legend>
+					<label> Quantidade de diárias&nbsp;&nbsp;<input type="number" name="diarias" size="23" value="0"></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Acrescentar meia diária <input type="checkbox" name="meia"></label>
+				</fieldset>
+				<fieldset > <legend><b>Resultado: </b></legend> <label><b>R$ <input type="text"  name="resultado" placeholder="0,00" readonly></b></label> 
+					&nbsp;&nbsp;<input type="button" name="calcular" value="Calcular" onclick="calcDiariaNac();">&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" name="limpar" value="Limpar"></fieldset><br/>
+			</form>
+	   	<table >
+				   <tr><td colspan="3"><center><b>INFORMAÇÕES SOBRE SUA CLASSIFICAÇÃO</b></center></td></tr>
+				   <tr><td colspan="3"><b>GRUPO A</b></td></tr>
+				   <tr><td>Secretários e Equivalentes (Presidentes idem)</td><td>Cargos de Direção, Assessoramento, Nível Superior, Operacional e Equivalente. (Empregados idem).</td><td>Colaboradores eventuais</td></tr>
+					<tr><td>R$ 211,01 (½ Diária R$ 105,50)</td><td>R$ 167,05 (½ Diária R$ 83,52)</td><td>R$ 167,05 (½ Diária R$ 83,52)</td></tr>
+					<tr><td colspan="3"><b>GRUPO B</b></td></tr>
+				   <tr><td>Secretários e Equivalentes (Presidentes idem)</td><td>Cargos de Direção, Assessoramento, Nível Superior, Operacional e Equivalente. (Empregados idem).</td><td>Colaboradores eventuais</td></tr>
+					<tr><td>R$ 276,07 (½ Diária R$ 138,04)</td><td>R$ 237,38 (½ Diária R$ 118,69)</td><td>R$ 237,38 (½ Diária R$ 118,69)</td></tr>
+					<tr><td colspan="3"><b>GRUPO C</b></td></tr>
+					<tr><td>Secretários e Equivalentes (Presidentes idem)</td><td>Cargos de Direção, Assessoramento, Nível Superior, Operacional e Equivalente. (Empregados idem).</td><td>Colaboradores eventuais</td></tr>
+					<tr><td>R$ 474,77 (½ Diária R$ 237,39)</td><td>R$ 422,02 (½ Diária R$ 211,01)</td><td>R$ 422,02 (½ Diária R$ 211,01)</td></tr>
+   		</table>
+   		<p>&nbsp;</p>
+		</div>
+
+
+		<div id="int" style="display:none">
+			<form name="formint">
+				<p><center><h2><b>Cálculo de Diárias Internacionais</b></h2></center></p>
+				<fieldset id="gcargoint"><legend>Cargo</legend>
+					<p><input type="radio" name="cargoint" value= "1" checked="yes" > 1- Secretário de Estado ou Equivalentes</p>
+					<p><input type="radio" name="cargoint" value= "2" > 2- Cargos de Direção e Assessoramento Superior a nível DAS-6, DAS-5, DAS-4 e DAS-3 e Equivalentes nas Autarquias e Fundações</p>
+					<p><input type="radio" name="cargoint" value= "3" > 3- Cargos de Direção, Assessoramento Superiores, a nível DAS-2 e DAS-1, Técnicos de Nível Superior, Funções Gratificadas e Demais Cargos, Empregos e Funções Equivalentes nas Autarquias e Fundações</p>
+				</fieldset>
+				<fieldset id="gdestinoint"><legend>Destino</legend>
+					<label>Localidade :
+      				<select name="destinoint">
+         				<option value="A">	Paíse da América do Sul e Central</option>
+				         <option value="B">	Demais países</option>
+				      </select>
+      			</label>
+				</fieldset>
+				<fieldset ><legend> Diárias:</legend>
+				<label> Quantidade de diárias&nbsp;&nbsp;<input type="number" name="diariasint" size="23" value="0"></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Acrescentar meia diária <input type="checkbox" name="meiaint"></label>
+				</fieldset>
+				<fieldset > <legend><b>Resultado: </b></legend> <label><b>$ <input type="text"  name="resultadoint" placeholder="0,00" readonly></b></label> </fieldset>
+				<p><input type="button" name="calcularint" value="Calcular" onclick="calcDiariaInt();"><input type="reset" name="limpar2" value="Limpar"></p>
+			</form>
+			<table>
+			 	<tr><td colspan="3"><center><b>INFORMAÇÕES SOBRE LOCALIDADES E SUA CLASSIFICAÇÃO</b></center></td></tr>
+				<tr><td colspan="3"><b>GRUPO A</b></td></tr>
+		 		<tr><td colspan="3">Paíse da América do Sul e Central</td></tr>
+		  		<tr><td>Secretário de Estado ou Equivalentes </td><td>Cargos de Direção e Assessoramento Superior a nível DAS-6, DAS-5, DAS-4 e DAS-3 e Equivalentes nas Autarquias e Fundações  </td><td>Cargos de Direção, Assessoramento Superiores, a nível DAS-2 e DAS-1, Técnicos de Nível Superior, Funções Gratificadas e Demais Cargos, Empregos e Funções Equivalentes nas Autarquias e Fundações</td></tr>
+		 		<tr><td>$ 330,00 </td><td>$ 300,00</td><td>$ 233,00</td></tr>
+		 		<tr><td colspan="3"><b>GRUPO B</b></td></tr>
+		 		<tr><td colspan="3">Demais Países</td></tr>
+		  		<tr><td>Secretário de Estado ou Equivalentes </td><td>Cargos de Direção e Assessoramento Superior a nível DAS-6, DAS-5, DAS-4 e DAS-3 e Equivalentes nas Autarquias e Fundações  </td><td>Cargos de Direção, Assessoramento Superiores, a nível DAS-2 e DAS-1, Técnicos de Nível Superior, Funções Gratificadas e Demais Cargos, Empregos e Funções Equivalentes nas Autarquias e Fundações</td></tr>
+		 		<tr><td>$ 400,00 </td><td>$ 360,36</td><td>$ 279,00</td></tr>
+		 	</table>
+		 	<p>&nbsp;</p>
+		</div>
+	</div>
+
+</body>
+</html>
