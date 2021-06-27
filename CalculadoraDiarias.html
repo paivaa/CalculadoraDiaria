@@ -373,7 +373,7 @@ release notes:
 </script>
 </head>
 <body class="body">
-	<div id="geral" style= " margin-left:25%; margin-right: 25%;	r">
+	<div id="geral" style= " margin-left:25%; margin-right: 25%;">
 		<p>&nbsp;</p>
 		<p><h1 align="center"> FUNTELPA </h1></p>
 		<p align="center">Versão 0.0.10</p>
@@ -385,13 +385,13 @@ release notes:
 
 				<p><center><h2><b>Cálculo de Diárias Nacionais</b></h2></center></p>
 				<p></p>
-				<fieldset id="cargo"><legend>Cargo</legend>
+				<fieldset id="cargo"><legend><b>Cargo:</b></legend>
 					
 					<label><p><input type="radio" name="cargo" value="1" checked="yes" > 1- Secretários e Equivalentes (Presidentes idem)</p></label>
 					<label><p><input type="radio" name="cargo" value="2" > 2- Cargos de Direção, Assessoramento, Nível Superior, Operacional e Equivalente. (Empregados idem).</p></label>
 					<label><p><input type="radio" name="cargo" value="3" > 3- Colaboradores eventuais</p></label>
 				</fieldset>
-				<fieldset id="gdestino"><legend>Destino</legend>
+				<fieldset id="gdestino"><legend><b>Destino:</b></legend>
 					<label>Localidade :
       				<select name="destino">
 						<option value="" selected>Selecione um destino:</option>
@@ -532,23 +532,56 @@ release notes:
 				      </select>
       			</label>
 				</fieldset>
-				<fieldset ><legend> Diárias:</legend>
-					<label> Quantidade de diárias&nbsp;&nbsp;<input type="number" name="diarias" size="23" value="0"></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Acrescentar meia diária <input type="checkbox" name="meia"></label>
+				<fieldset ><legend><b>Diárias:</b></legend>
+					<label> Quantidade de diárias&nbsp;&nbsp;<input type="number" name="diarias" size="23" value="0"></label><br />
+					<label>Acrescentar meia diária <input type="checkbox" name="meia"></label>
 				</fieldset>
 				<fieldset > <legend><b>Resultado: </b></legend> <label><b>R$ <input type="text"  name="resultado" placeholder="0,00" readonly></b></label> 
 					&nbsp;&nbsp;<input type="button" name="calcular" value="Calcular" onclick="calcDiariaNac();">&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" name="limpar" value="Limpar"></fieldset><br/>
 			</form>
-	   	<table >
-				   <tr><td colspan="3"><center><b>INFORMAÇÕES SOBRE SUA CLASSIFICAÇÃO</b></center></td></tr>
-				   <tr><td colspan="3"><b>GRUPO A</b></td></tr>
-				   <tr><td>Secretários e Equivalentes (Presidentes idem)</td><td>Cargos de Direção, Assessoramento, Nível Superior, Operacional e Equivalente. (Empregados idem).</td><td>Colaboradores eventuais</td></tr>
-					<tr><td>R$ 211,01 (½ Diária R$ 105,50)</td><td>R$ 167,05 (½ Diária R$ 83,52)</td><td>R$ 167,05 (½ Diária R$ 83,52)</td></tr>
-					<tr><td colspan="3"><b>GRUPO B</b></td></tr>
-				   <tr><td>Secretários e Equivalentes (Presidentes idem)</td><td>Cargos de Direção, Assessoramento, Nível Superior, Operacional e Equivalente. (Empregados idem).</td><td>Colaboradores eventuais</td></tr>
-					<tr><td>R$ 276,07 (½ Diária R$ 138,04)</td><td>R$ 237,38 (½ Diária R$ 118,69)</td><td>R$ 237,38 (½ Diária R$ 118,69)</td></tr>
-					<tr><td colspan="3"><b>GRUPO C</b></td></tr>
-					<tr><td>Secretários e Equivalentes (Presidentes idem)</td><td>Cargos de Direção, Assessoramento, Nível Superior, Operacional e Equivalente. (Empregados idem).</td><td>Colaboradores eventuais</td></tr>
-					<tr><td>R$ 474,77 (½ Diária R$ 237,39)</td><td>R$ 422,02 (½ Diária R$ 211,01)</td><td>R$ 422,02 (½ Diária R$ 211,01)</td></tr>
+	   	<table border="1">
+				   <tr>
+					   <th colspan="4"><b>INFORMAÇÕES SOBRE SUA CLASSIFICAÇÃO</b></th>
+					</tr>
+				   <tr>
+					   <td rowspan="3" align="center"><b>GRUPO A</b></td>
+					</tr>
+				   <tr>
+					   <td align="center">Secretários e Equivalentes (Presidentes idem)</td>
+					   <td align="center">Cargos de Direção, Assessoramento, Nível Superior, Operacional e Equivalente. (Empregados idem).</td>
+					   <td align="center">Colaboradores eventuais</td>
+					</tr>
+					<tr>
+						<td align="center">R$ 211,01 (½ Diária R$ 105,50)</td>
+						<td align="center">R$ 167,05 (½ Diária R$ 83,52)</td>
+						<td align="center">R$ 167,05 (½ Diária R$ 83,52)</td>
+					</tr>
+					<tr>
+						<td rowspan="3" align="center"><b>GRUPO B</b></td>
+					</tr>
+				   <tr>
+					   <td align="center">Secretários e Equivalentes (Presidentes idem)</td>
+					   <td align="center">Cargos de Direção, Assessoramento, Nível Superior, Operacional e Equivalente. (Empregados idem).</td>
+					   <td align="center">Colaboradores eventuais</td>
+					</tr>
+					<tr>
+						<td align="center">R$ 276,07 (½ Diária R$ 138,04)</td>
+						<td align="center">R$ 237,38 (½ Diária R$ 118,69)</td>
+						<td align="center">R$ 237,38 (½ Diária R$ 118,69)</td>
+					</tr>
+					<tr>
+						<td rowspan="3" align="center"><b>GRUPO C</b></td>
+					</tr>
+					<tr>
+						<td align="center">Secretários e Equivalentes (Presidentes idem)</td>
+						<td align="center">Cargos de Direção, Assessoramento, Nível Superior, Operacional e Equivalente. (Empregados idem).</td>
+						<td align="center">Colaboradores eventuais</td>
+					</tr>
+					<tr>
+						<td align="center">R$ 474,77 (½ Diária R$ 237,39)</td>
+						<td align="center">R$ 422,02 (½ Diária R$ 211,01)</td>
+						<td align="center">R$ 422,02 (½ Diária R$ 211,01)</td>
+					</tr>
    		</table>
    		<p>&nbsp;</p>
 		</div>
